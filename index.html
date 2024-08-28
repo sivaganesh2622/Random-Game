@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(176, 22, 227);
+            height: 100vh;
+        }
+        .box{
+            display: flex;
+            width: 500px;
+            height: 300px;
+            flex-direction: column;
+            padding: 10px;
+            background-color: rgb(86, 174, 232);
+            align-items: center;
+            justify-content: center;
+        }
+        input{
+            padding: 5px 10px;
+            margin: 5px 0px;
+        }
+        button{
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 5px 3px;
+            border: none;
+        }
+        h2{
+            text-align: center;
+            padding: 5px 0px;
+        }
+        .guessing{
+            padding: 8px 0px;
+        }
+        h3{
+            padding: 5px 0px 10px 0px;
+        }
+        .container p{
+            padding: 10px 2px;
+        }
+        .btn{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Game Project:</h2>
+        <p><b>Random Number Game</b></p>
+        <div class="box">
+            <h3>Guess the Numbber from 1 to 10</h3>
+            <input type="text" name="" id="" placeholder="Enter the Guess">
+            <div class="btn">
+                <button>Check</button>
+                <button class="restart">restart</button>
+            </div>
+            <p class="guessing"></p>
+            <h3>Available guesses: <span id="guessCount"></span> </h3>
+        </div>
+    </div>
+</body>
+<script>
+    let inputBox = document.querySelector("input");
+    let button = document.querySelector("button");
+    let restart = document.querySelector(".restart");
+    let guessing = document.querySelector(".guessing");
+
+    let guessCount = document.querySelector("#guessCount");
+    
+    let guessChance = 3;
+    guessCount.innerHTML = guessChance;
+    // alert(guessChance);
+    
+    
+    restart.addEventListener("click",()=>{
+        guessChance = 3;
+        guessCount.innerHTML = guessChance;
+        console.log(guessChance);
+
+        if(button.disabled == true){
+            button.disabled = false;
+        }
+    });
+
+    
+    
+    button.addEventListener("click",()=>{
+        let randomNumber = Math.floor(Math.random() * 2) + 1;
+        
+        if(randomNumber == inputBox.value){
+            guessing.innerHTML = "You Win";
+        }
+        else{
+            
+            guessing.innerHTML = "The number is: <b>" +randomNumber + "</b> try again ";
+            // console.log();
+            guessChance--;
+            guessCount.innerHTML = guessChance;
+
+            if(guessChance == 0){
+                button.disabled = true;
+
+
+            }
+        }
+    });
+</script>
+</html>
